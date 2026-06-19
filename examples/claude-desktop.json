@@ -1,0 +1,15 @@
+{
+  "mcpServers": {
+    "htmlweb": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "supergateway",
+        "--streamableHttp",
+        "https://mcp.htmlweb.ru/",
+        "--oauth2Bearer",
+        "YOUR_API_KEY"
+      ]
+    }
+  }
+}

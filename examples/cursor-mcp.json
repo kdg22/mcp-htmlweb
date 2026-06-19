@@ -1,0 +1,10 @@
+{
+  "mcpServers": {
+    "htmlweb": {
+      "url": "https://mcp.htmlweb.ru/",
+      "headers": {
+        "Authorization": "Bearer YOUR_API_KEY"
+      }
+    }
+  }
+}

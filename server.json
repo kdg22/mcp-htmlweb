@@ -1,0 +1,26 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "ru.htmlweb/mcp",
+  "title": "htmlweb.ru — справочники и проверки для AI",
+  "description": "Организации по ИНН/ОГРН, банки по БИК, geo/IP, email, WHOIS, телефон, валидация. Оплата через api_key htmlweb.ru (20 бесплатных запросов/сутки).",
+  "version": "1.0.0",
+  "websiteUrl": "https://mcp.htmlweb.ru/",
+  "repository": {
+    "url": "https://github.com/htmlweb/mcp-htmlweb",
+    "source": "github"
+  },
+  "remotes": [
+    {
+      "type": "streamable-http",
+      "url": "https://mcp.htmlweb.ru/",
+      "headers": [
+        {
+          "name": "Authorization",
+          "description": "Bearer YOUR_API_KEY с https://htmlweb.ru/user/",
+          "isRequired": true,
+          "isSecret": true
+        }
+      ]
+    }
+  ]
+}
