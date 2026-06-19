@@ -2,7 +2,7 @@
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
   "name": "ru.htmlweb/mcp",
   "title": "htmlweb.ru — справочники и проверки для AI",
-  "description": "25 MCP tools: ЕГРЮЛ/ИНН, банки, email, geo, WHOIS, телефон/MNP, склонение RU, сумма прописью, MCC, праздники, BIN, авто. api_key htmlweb.ru, 20 бесплатных запросов/сутки.",
+  "description": "RU org INN/OGRN, banks, geo, email, WHOIS, phone, inflect, MCC. Bearer api_key, 20 free/day.",
   "version": "1.1.0",
   "websiteUrl": "https://mcp.htmlweb.ru/",
   "repository": {
