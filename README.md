@@ -1,19 +1,16 @@
 # htmlweb.ru MCP Server
 
-**Remote MCP-сервер** для AI-агентов (Cursor, Claude, OpenAI и др.): справочники и проверки по России — организации, банки, geo, IP, email, WHOIS, телефон.
+**Remote MCP** для Cursor, Claude, OpenAI: справочники и проверки по России.
 
 - **Endpoint:** https://mcp.htmlweb.ru/
-- **Документация и тест с вашим ключом:** https://htmlweb.ru/user/mcp.php
-- **Регистрация / api_key:** https://htmlweb.ru/user/signup.php
-- **Карточка для MCP Registry:** https://mcp.htmlweb.ru/server.json
-
-Транспорт: **Streamable HTTP** (JSON-RPC 2.0: `initialize`, `tools/list`, `tools/call`).  
-Аутентификация: `Authorization: Bearer YOUR_API_KEY`.
+- **Тест с ключом:** https://htmlweb.ru/user/mcp.php
+- **Registry:** https://mcp.htmlweb.ru/server.json · [PUBLISH.md](PUBLISH.md)
+- **Тарифы / бесплатные API:** [PRICING.md](PRICING.md)
 
 ## Быстрый старт
 
-1. [Зарегистрируйтесь](https://htmlweb.ru/user/signup.php) и скопируйте **api_key** из профиля.
-2. Проверьте подключение (бесплатно — только `tools/list`, лимит не списывается):
+1. [Регистрация](https://htmlweb.ru/user/signup.php) → `api_key` в профиле.
+2. Проверка (бесплатно):
 
 ```bash
 curl -sS -X POST 'https://mcp.htmlweb.ru/' \
@@ -22,88 +19,48 @@ curl -sS -X POST 'https://mcp.htmlweb.ru/' \
   -d '{"jsonrpc":"2.0","id":1,"method":"tools/list","params":{}}'
 ```
 
-3. Подключите клиент — см. [examples/](examples/).
+3. Cursor — [examples/cursor-mcp.json](examples/cursor-mcp.json).
 
-**Тариф:** 20 бесплатных запросов в сутки на ключ; далее — [тарифы htmlweb.ru](https://htmlweb.ru/user/tariffs.php).  
-Валидация ИНН/ОГРН (`validate_inn`, `validate_ogrn`) — **бесплатно**, лимит не списывается.
+**20 запросов/сутки** бесплатно (платные tools); validator и `get_balance` — без списания.
 
-## Tools (10)
+## Tools (25)
 
-| Tool | Описание |
-|------|----------|
-| `lookup_organization` | Организация / ИП по ИНН или ОГРН (ЕГРЮЛ) |
-| `lookup_bank` | Банк по БИК (9 цифр) |
-| `validate_inn` | Контрольная сумма ИНН (бесплатно) |
-| `validate_ogrn` | Контрольная сумма ОГРН/ОГРНИП (бесплатно) |
-| `ip_geolocation` | Город, регион, страна по IP |
-| `geo_search` | Поиск стран, регионов, городов |
-| `geo_distance` | Расстояние между городами (id из geo_search) |
-| `verify_email` | Формат, MX; опционально SMTP |
-| `domain_whois` | WHOIS домена |
-| `phone_location` | Регион и оператор по номеру |
+| Tool | Назначение | Лимит |
+|------|------------|-------|
+| `get_balance` | Остаток запросов и баланс ₽ | бесплатно |
+| `lookup_organization` | ЕГРЮЛ/ИП по ИНН/ОГРН | 1 |
+| `lookup_bank` | Банк по БИК | 1 |
+| `validate_requisites` | Пакет checksum: ИНН, КПП, БИК, р/с, к/с, ОГРН | бесплатно |
+| `validate_inn` / `validate_ogrn` | Контрольная сумма | бесплатно |
+| `inflect_russian` | Склонение слова | 1 |
+| `number_to_words_rub` | Сумма прописью | 1 |
+| `parse_text_date` | «завтра», «15 марта» → дата | 1 |
+| `lookup_mcc` | MCC → категория терминала | 1 |
+| `russian_holidays` | Праздники РФ за период | 1 |
+| `verify_email` | Email MX/SMTP | 1–2 |
+| `phone_location` | Оператор DEF | 1 |
+| `phone_mnp_operator` | Оператор после MNP | 1 |
+| `ip_geolocation` | Geo по IP | 1 |
+| `ip_spam_reputation` | IP в spam-базах | 1 |
+| `geo_search` | Поиск city id | 1 |
+| `geo_distance` | Расстояние км | 1 |
+| `nearest_city` | Города у GPS | 1 |
+| `timezone_and_sun` | Рассвет/закат | 1 |
+| `transliterate` | Транслит | 1 |
+| `detect_text_language` | Язык текста | 1 |
+| `card_bin_lookup` | BIN карты | 1 |
+| `car_brand_model` | Марки/модели авто | 1 |
+| `domain_whois` | WHOIS домена | 1 |
 
-Пример вызова tool:
-
-```bash
-curl -sS -X POST 'https://mcp.htmlweb.ru/' \
-  -H 'Content-Type: application/json' \
-  -H 'Authorization: Bearer YOUR_API_KEY' \
-  -d @examples/tool-call-validate-inn.json
-```
-
-## Cursor
-
-Скопируйте в `.cursor/mcp.json` (подставьте ключ):
-
-```json
-{
-  "mcpServers": {
-    "htmlweb": {
-      "url": "https://mcp.htmlweb.ru/",
-      "headers": {
-        "Authorization": "Bearer YOUR_API_KEY"
-      }
-    }
-  }
-}
-```
-
-Готовый файл: [examples/cursor-mcp.json](examples/cursor-mcp.json).
-
-## Claude Desktop
-
-Через [supergateway](https://www.npmjs.com/package/supergateway) — см. [examples/claude-desktop.json](examples/claude-desktop.json).
-
-## OpenAI Responses API
-
-```json
-{
-  "type": "mcp",
-  "server_label": "htmlweb",
-  "server_url": "https://mcp.htmlweb.ru/",
-  "headers": { "Authorization": "Bearer YOUR_API_KEY" },
-  "require_approval": "never"
-}
-```
-
-## MCP Registry
-
-Метаданные сервера — [server.json](server.json) (имя `ru.htmlweb/mcp`).
-
-Публикация (CLI **mcp-publisher**, не npm):
+## Registry
 
 ```bash
-# бинарник: https://github.com/modelcontextprotocol/registry/releases
-mcp-publisher login dns    # верификация домена htmlweb.ru
+mcp-publisher login dns
 mcp-publisher publish server.json
 ```
 
-Подробнее: [MCP Registry quickstart](https://github.com/modelcontextprotocol/registry/blob/main/docs/modelcontextprotocol-io/quickstart.mdx).
-
-## REST API
-
-Те же данные доступны через REST: https://htmlweb.ru/api/
+См. [PUBLISH.md](PUBLISH.md).
 
 ---
 
-English: hosted MCP server for Russian business/geo lookups (INN, OGRN, BIK, IP geo, email, WHOIS, phone). Sign up at htmlweb.ru for an API key, connect via Streamable HTTP at `https://mcp.htmlweb.ru/`.
+English: hosted MCP for Russian business data (INN, OGRN, BIK, geo, email, WHOIS). Bearer api_key from htmlweb.ru.
