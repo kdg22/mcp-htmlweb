@@ -4,7 +4,7 @@
 
 - **Endpoint:** https://mcp.htmlweb.ru/
 - **Тест с ключом:** https://htmlweb.ru/user/mcp.php
-- **Registry:** https://mcp.htmlweb.ru/server.json · [PUBLISH.md](PUBLISH.md)
+- **Registry:** https://mcp.htmlweb.ru/server.json · [каталог MCP](https://registry.modelcontextprotocol.io/)
 - **Тарифы / бесплатные API:** [PRICING.md](PRICING.md)
 
 ## Быстрый старт
@@ -54,12 +54,7 @@ curl -sS -X POST 'https://mcp.htmlweb.ru/' \
 
 ## Registry
 
-```bash
-mcp-publisher login dns
-mcp-publisher publish server.json
-```
-
-См. [PUBLISH.md](PUBLISH.md).
+Карточка **ru.htmlweb/mcp** v1.1.0: [registry.modelcontextprotocol.io](https://registry.modelcontextprotocol.io/) · метаданные [server.json](https://mcp.htmlweb.ru/server.json).
 
 ---
 
