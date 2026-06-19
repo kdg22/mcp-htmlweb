@@ -5,6 +5,15 @@
 Репозиторий уже на https://github.com/kdg22/mcp-htmlweb (push делали из Cursor).  
 Локально меняете файлы → `git push` только если правили README/server.json в `mcp-htmlweb/`.
 
+### Topics и Website (не Settings)
+
+Topics **нет** в **Settings** → General. На главной репозитория: блок **About** справа → шестерёнка **Edit repository details**.
+
+| Поле | Значение |
+|------|----------|
+| Website | `https://mcp.htmlweb.ru/` |
+| Topics | `mcp` `model-context-protocol` `russia` `inn` `egrul` `cursor` `fintech` |
+
 ---
 
 ## Registry: DNS через Яндекс (имя `ru.htmlweb/mcp`)
