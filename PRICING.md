@@ -4,15 +4,15 @@ MCP повторяет биллинг REST API htmlweb.ru: тот же `api_key`
 
 ## Сейчас
 
-| Категория | Tools | Списание лимита |
+| Категория | Сервисы | Списание лимита |
 |-----------|-------|-----------------|
-| **Бесплатно** | `get_balance`, `validate_inn`, `validate_ogrn`, `validate_requisites`, `tools/list` | Нет |
+| **Бесплатно** | `get_balance`, `validate_inn`, `validate_ogrn`, `validate_requisites`, список сервисов (`tools/list`) | Нет |
 | **1 запрос** | org, bank, geo, email (MX), whois, phone, MNP, inflect, num2str, mcc, … | Да |
 | **2 запроса** | `verify_email` с `smtp_check=1`, `geo/timezone` без country | Да ×2 |
 
 **20 запросов/сутки** бесплатно на ключ (суммарно все API). Далее — [тарифы](https://htmlweb.ru/user/tariffs.php).
 
-## Рекомендации: как монетизировать «бесплатные» validator/tools
+## Рекомендации: как монетизировать «бесплатные» validator/сервисы
 
 Сейчас `Validator` **не списывает** лимит — агент может гонять validate бесконечно. Варианты (продуктовые, без смены кода пока):
 
