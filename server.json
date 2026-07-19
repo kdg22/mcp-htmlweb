@@ -2,8 +2,8 @@
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
   "name": "ru.htmlweb/mcp",
   "title": "htmlweb.ru — справочники и проверки для AI",
-  "description": "RU INN/OGRN, banks, geo, email, WHOIS. Agentic Commerce: agent pays via card/crypto. 20 free/day.",
-  "version": "1.2.0",
+  "description": "RU INN/OGRN, banks, geo via api_call → /json/{obj}/{m}. Agent register_agent + card bind/rebill. Same billing as REST.",
+  "version": "1.6.2",
   "websiteUrl": "https://mcp.htmlweb.ru/",
   "repository": {
     "url": "https://github.com/kdg22/mcp-htmlweb",
@@ -16,8 +16,8 @@
       "headers": [
         {
           "name": "Authorization",
-          "description": "Bearer API_KEY оператора агента с https://htmlweb.ru/user/",
-          "isRequired": true,
+          "description": "Bearer api_key после tools/call register_agent (не обязателен для первого вызова)",
+          "isRequired": false,
           "isSecret": true
         }
       ]

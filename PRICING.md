@@ -1,45 +1,30 @@
-# Тарификация MCP и бесплатные API
+# Тарификация MCP
 
-MCP повторяет биллинг REST API htmlweb.ru: тот же `api_key`, те же `limit` и `balans` в ответе.
+MCP вызывает **тот же** биллинг, что REST: `Get::apiParam` → `Class::pub_*` (`/json/{obj}/{m}`).
 
-## Сейчас
+## Баланс (Money, без отдельных MCP-tools)
 
-| Категория | Сервисы | Списание лимита |
-|-----------|-------|-----------------|
-| **Бесплатно** | `get_balance`, `validate_inn`, `validate_ogrn`, `validate_requisites`, список сервисов (`tools/list`) | Нет |
-| **1 запрос** | org, bank, geo, email (MX), whois, phone, MNP, inflect, num2str, mcc, … | Да |
-| **2 запроса** | `verify_email` с `smtp_check=1`, `geo/timezone` без country | Да ×2 |
+| Действие | Вызов |
+|----------|--------|
+| Остаток | `api_call` → `money` / `get_limit` (`Money::pub_get_limit`) |
+| Купить пакет с баланса | `api_call` → `money` / `set_limit` + `set_limit=N` (`Money::pub_set_limit`) |
 
-**20 запросов/сутки** бесплатно на ключ (суммарно все API). Далее — [тарифы](https://htmlweb.ru/user/tariffs.php).
+Пополнение рублями (карта/крипто/rebill) — MCP tools `create_topup_*`, `bind_payment_card`, `charge_saved_card`, `acp_checkout` (Robokassa/Bybit), не методы Money.
 
-## Рекомендации: как монетизировать «бесплатные» validator/сервисы
+## MCP tools без списания лимита запросов
 
-Сейчас `Validator` **не списывает** лимит — агент может гонять validate бесконечно. Варианты (продуктовые, без смены кода пока):
+`register_agent`, `get_pricing`, `api_catalog`, `tools/list`; `money/get_limit` и `money/set_limit` тоже не тратят «запрос справочника» на сам вызов.
 
-### A. Оставить как есть (воронка)
-- Бесплатная проверка checksum → платный `lookup_organization` / `lookup_bank`.
-- Плюс: низкий порог входа. Минус: нагрузка без выручки.
+## Данные
 
-### B. Льготный MCP-пакет (рекомендуется)
-- **100 validate-вызовов/сутки через MCP** на ключ, далее 1 платный запрос за batch.
-- Реализация: счётчик в `limit_request` или отдельное поле `mcp_validate_day`.
-- REST API validator остаётся полностью бесплатным (обратная совместимость).
+`mnp`, `geo`, `service`, `convert`, `calendar`, `mail`, `validator` — как у REST; каталог: `api_catalog`.
 
-### C. Пакет «Бухгалтерия AI»
-- Тариф: N₽/мес → 5000 validate + 500 org lookup.
-- Продавать в [личном кабинете](https://htmlweb.ru/user/tariffs.php) отдельной строкой.
+## Бесплатная суточная квота
 
-### D. Ужесточить только MCP
-- После 50 бесплатных validate/день через MCP → HTTP 429 с текстом «используйте lookup_organization».
-- Не трогать прямой REST — только заголовок `User-Agent` / Referer mcp или внутренний curl с `mcp.htmlweb.ru`.
+- Подтверждённый аккаунт сайта (`adm≠0`): N/сутки.
+- Ключ `register_agent` (`adm=0`): без бесплатной квоты.
+- Антиабьюз: ≤2 `register_agent`/сутки с IP; повтор за день — тот же ключ; ≤3 ключа агента с IP.
 
-### E. Объединить validate в один tool (уже сделано)
-- `validate_requisites` — один вызов, несколько полей, всё ещё бесплатно, но меньше RPC-шума.
+## Боты
 
-**Практичный старт:** A + E сейчас; через месяц статистики — **B** или **D** по отчёту `/user/#report`.
-
-## Для агентов
-
-1. В начале сессии: `get_balance`.
-2. При `limit` &lt; 5: сообщить пользователю ссылку на [баланс](https://htmlweb.ru/user/balans.php).
-3. Checksum → `validate_*`; реальные данные → `lookup_*`.
+Корневой `.htaccess` htmlweb.ru: AI-UA **без** api_key/Bearer → **403 Forbidden** (не редирект на mcp). MCP — для клиентов с ключом/MCP, не свалка краулеров.
