@@ -3,7 +3,7 @@
   "name": "ru.htmlweb/mcp",
   "title": "htmlweb.ru — справочники и проверки для AI",
   "description": "RU INN/OGRN, banks, geo via api_call → /json/{obj}/{m}. Agent register_agent + card bind/rebill. Same billing as REST.",
-  "version": "1.6.2",
+  "version": "1.6.3",
   "websiteUrl": "https://mcp.htmlweb.ru/",
   "repository": {
     "url": "https://github.com/kdg22/mcp-htmlweb",
