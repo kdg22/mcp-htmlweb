@@ -21,7 +21,7 @@
 |------|------------|
 | `register_agent` | Выдать `api_key` (до 2/сутки с IP) |
 | `api_catalog` | Каталог классов и `pub_*` |
-| `api_call` | `Get::apiParam` → `Class::pub_*` (= `/json/{obj}/{m}`) |
+| `api_call` | `Get::apiParam` → `Class::pub_*` (= `/json/{obj}/{m}`); obj включает **ai** (ocr, spam, result, health) |
 | `get_pricing` | Тарифы / commerce |
 | `bind_payment_card` / `charge_saved_card` | Привязка карты + rebill |
 | `create_topup_card` / `create_topup_crypto` | Пополнение рублями |
