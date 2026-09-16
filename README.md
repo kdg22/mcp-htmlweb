@@ -39,6 +39,10 @@
 
 Классы: `calendar`, `convert`, `geo`, `mail`, `mnp`, `money`, `service`, `validator`.
 
+## Календарь htmlweb — программа для Windows
+
+Те же данные (`deskcal`) на рабочем столе: часы с календарём на панели задач, события Google, напоминания, карточки звонков и СМС. Скачивание и описание — [calendar/README.md](calendar/README.md).
+
 ## Registry
 
 Карточка **ru.htmlweb/mcp** v1.6.2.

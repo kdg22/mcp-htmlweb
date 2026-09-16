@@ -1,0 +1,25 @@
+# yaml-language-server: $schema=https://aka.ms/winget-manifest.singleton.1.10.0.schema.json
+# Положить в manifests/h/Htmlweb/Calendar/1.1.0/Htmlweb.Calendar.yaml
+PackageIdentifier: Htmlweb.Calendar
+PackageVersion: 1.1.0
+PackageName: Календарь htmlweb
+Publisher: htmlweb.ru
+License: Proprietary (free for personal use)
+LicenseUrl: https://htmlweb.ru/calendar/about.php#terms
+ShortDescription: Часы с календарём у трея Windows — события Google и htmlweb, напоминания о важном, карточки звонков и СМС.
+PackageUrl: https://htmlweb.ru/calendar/about.php
+Moniker: htmlweb-calendar
+Tags:
+- calendar
+- google-calendar
+- reminders
+- tray
+- clock
+Installers:
+- Architecture: x64
+  InstallerType: portable
+  InstallerUrl: https://htmlweb.ru/calendar/win/HtmlwebCalendar.exe
+  InstallerSha256: 3E209D7B1B9CE2BB448BD21FD558D27CD65AA5B6A16DC193BEDDC17CBAB50920
+PackageLocale: ru-RU
+ManifestType: singleton
+ManifestVersion: 1.10.0

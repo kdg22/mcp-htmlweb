@@ -1,0 +1,16 @@
+# yaml-language-server: $schema=https://aka.ms/winget-manifest.installer.1.10.0.schema.json
+# Положить в manifests/h/Htmlweb/Calendar/1.1.0/Htmlweb.Calendar.installer.yaml
+PackageIdentifier: Htmlweb.Calendar
+PackageVersion: 1.1.0
+Installers:
+- InstallerLocale: ru-RU
+  Architecture: x64
+  InstallerType: portable
+  InstallerUrl: https://htmlweb.ru/calendar/win/HtmlwebCalendar.exe
+  InstallerSha256: 3E209D7B1B9CE2BB448BD21FD558D27CD65AA5B6A16DC193BEDDC17CBAB50920
+  InstallerSwitches:
+    Custom: ""
+  PortableCommandAlias: htmlweb-calendar
+ManifestType: installer
+ManifestVersion: 1.10.0
+ReleaseDate: 2026-09-16
