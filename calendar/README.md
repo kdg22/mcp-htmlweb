@@ -2,10 +2,10 @@
 
 Часы с календарём на панели задач рядом с треем. Клик по часам открывает месяц и ближайшие события из **Google Календаря** и календаря htmlweb — те же данные, что и в MCP-сервисе (`deskcal`: `events`, `event_save`, `notify_push`).
 
-- **Скачать (1.2.0):** https://htmlweb.ru/calendar/win/HtmlwebCalendar.exe
+- **Скачать (1.2.1):** https://htmlweb.ru/calendar/win/HtmlwebCalendar.exe
 - **Страница и описание:** https://htmlweb.ru/calendar/about.php#download
 - **Веб-календарь:** https://htmlweb.ru/calendar/app.php
-- SHA256 exe 1.2.0: `3E209D7B1B9CE2BB448BD21FD558D27CD65AA5B6A16DC193BEDDC17CBAB50920`
+- SHA256 exe 1.2.1: `188AF9755BE69F3528F4631D02A538753CA4C50A073A687943E50EE87CCE20E3`
 
 ## Возможности
 
